@@ -1,29 +1,28 @@
-import cupy as cp
-
 from .exceptions import InconsistentStructureError, StructuresNotMatchError
+from .settings import xp
 from .state import State
 from .utils import check_1darray, check_hermite
 
 
 class Observable:
     """
-    observable class
+    observable
 
     params:
-        matrix: cupy.ndarray
+        matrix:  xp.ndarray
             representation matrix
-        structure: cupy.ndarray
+        structure:  xp.ndarray
             structure of observable w.r.t. compound system
     """
 
-    matrix: cp.ndarray
-    structure: cp.ndarray
+    matrix: xp.ndarray
+    structure: xp.ndarray
 
-    def __init__(self, matrix: cp.ndarray, structure: cp.ndarray):
+    def __init__(self, matrix: xp.ndarray, structure: xp.ndarray):
         check_1darray(structure)
         check_hermite(matrix)
-        expected_dimension = cp.prod(structure)
-        if cp.array([matrix.shape[0]], dtype=cp.int16) != expected_dimension:
+        expected_dimension = xp.prod(structure)
+        if xp.array([matrix.shape[0]], dtype=xp.int16) != expected_dimension:
             raise InconsistentStructureError
         self.structure = structure
         self.matrix = matrix
@@ -39,15 +38,25 @@ class Observable:
             float
                 observed value
         """
-        if not cp.array_equal(self.structure, state.structure):
+        if not xp.array_equal(self.structure, state.structure):
             raise StructuresNotMatchError
+        eigen_values, eigen_vectors_groups = self._analyze_observable()
+        return float(self._converge(state, eigen_values, eigen_vectors_groups))
 
-        eigen_values, eigen_vectors = cp.linalg.eigh(self.matrix)
-        sorted_indices = cp.argsort(eigen_values)
+    def _analyze_observable(self) -> tuple[xp.array, list[xp.array]]:
+        """
+        derivate eigen values and eigen vectors of observable
+
+        return value:
+            tuple[ xp.array, list[ xp.array]]
+                devivated eigen values and eigen vectors groups
+        """
+        eigen_values, eigen_vectors = xp.linalg.eigh(self.matrix)
+        sorted_indices = xp.argsort(eigen_values)
         eigen_values.sort()
         eigen_vectors = eigen_vectors[sorted_indices]
-        eigen_values, indices = cp.unique(
-            cp.round(eigen_values, decimals=5), return_index=True
+        eigen_values, indices = xp.unique(
+            xp.round(eigen_values, decimals=5), return_index=True
         )
         indices = list(indices)
         indices.append(eigen_vectors.shape[0])
@@ -55,37 +64,37 @@ class Observable:
             eigen_vectors[indices[i] : indices[i + 1]]
             for i in range(len(indices) - 1)
         ]
-        return float(self._converge(state, eigen_values, eigen_vectors_groups))
+        return (eigen_values, eigen_vectors_groups)
 
     def _converge(
         self,
         state: State,
-        eigen_values: cp.array,
-        eigen_vectors_groups: list[cp.array],
-    ) -> cp.float32:
+        eigen_values: xp.array,
+        eigen_vectors_groups: list[xp.array],
+    ) -> xp.float32:
         """
         converge state
 
         params:
             state: State
                 target state for converged
-            observable_values: list[cupy.array]
+            observable_values: list[ xp.array]
                 array of observable values
-            observable_projections: list[cupy.array]
+            observable_projections: list[ xp.array]
                 array of observable projections
 
         return value:
-            cupy.float32
+             xp.float32
                 observed value
         """
-        probabilities = cp.array(
+        probabilities = xp.array(
             [
-                cp.sum(
-                    cp.array(
+                xp.sum(
+                    xp.array(
                         [
-                            cp.inner(
+                            xp.inner(
                                 eigen_vectors[i],
-                                cp.dot(state.matrix, eigen_vectors[i]),
+                                xp.dot(state.matrix, eigen_vectors[i]),
                             )
                             for i in range(eigen_vectors.shape[0])
                         ]
@@ -93,29 +102,29 @@ class Observable:
                 ).real
                 for eigen_vectors in eigen_vectors_groups
             ],
-            dtype=cp.float32,
+            dtype=xp.float32,
         )
-        indices = cp.arange(probabilities.size)
+        indices = xp.arange(probabilities.size)
         observed_index = int(
-            cp.random.choice(indices, size=1, p=probabilities)
+            xp.random.choice(indices, size=1, p=probabilities)
         )
         observed_probability = probabilities[observed_index]
         observed_vectors = eigen_vectors_groups[observed_index]
-        observed_projection = cp.sum(
-            cp.array(
+        observed_projection = xp.sum(
+            xp.array(
                 [
-                    cp.dot(
-                        cp.transpose(observed_vectors[i]),
-                        cp.conj(observed_vectors[i]),
+                    xp.dot(
+                        xp.transpose(observed_vectors[i]),
+                        xp.conj(observed_vectors[i]),
                     )
                     for i in range(observed_vectors.shape[0])
                 ],
-                dtype=cp.complex64,
+                dtype=xp.complex64,
             )
         )
-        state.matrix = cp.divide(
-            cp.dot(
-                observed_projection, cp.dot(state.matrix, observed_projection)
+        state.matrix = xp.divide(
+            xp.dot(
+                observed_projection, xp.dot(state.matrix, observed_projection)
             ),
             observed_probability,
         )

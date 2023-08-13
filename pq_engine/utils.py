@@ -1,5 +1,3 @@
-import cupy as cp
-
 from .exceptions import (
     NonOneTraceError,
     NotHermiteError,
@@ -7,56 +5,87 @@ from .exceptions import (
     NotSquareError,
     NotUnitaryError,
 )
+from .settings import xp
 
 
-def check_1darray(array: cp.ndarray) -> None:
+def check_1darray(array: xp.ndarray) -> None:
     """
     check given array is 1-dimensional
 
     args:
-        array: cupy.ndarray
+        array:  xp.ndarray
+            target array
     """
     if len(array.shape) != 1:
         raise NotOneDimensionalError
 
 
-def check_square(matrix: cp.ndarray) -> None:
+def check_square(matrix: xp.ndarray) -> None:
     """
     check matrix is square
 
     args:
-        matrix: cupy.ndarray
+        matrix:  xp.ndarray
+            target matrix
     """
     if matrix.shape[0] != matrix.shape[1]:
         raise NotSquareError
 
 
-def check_hermite(matrix: cp.ndarray) -> None:
+def check_hermite(matrix: xp.ndarray) -> None:
+    """
+    check matrix is hermite
+
+    args:
+        matrix:  xp.ndarray
+            target matrix
+    """
     check_square(matrix)
-    if not cp.allclose(matrix, cp.conj(cp.transpose(matrix)), atol=1.0e-5):
+    if not xp.allclose(matrix, xp.conj(xp.transpose(matrix)), atol=1.0e-5):
         raise NotHermiteError
 
 
-def check_unitary(matrix: cp.ndarray) -> None:
+def check_unitary(matrix: xp.ndarray) -> None:
+    """
+    check matrix is unitary
+
+    args:
+        matrix:  xp.ndarray
+            target matrix
+    """
     check_square(matrix)
     expected_dimension = matrix.shape[0]
-    if not cp.allclose(
-        cp.dot(
+    if not xp.allclose(
+        xp.dot(
             matrix,
-            cp.conj(cp.transpose(matrix)),
+            xp.conj(xp.transpose(matrix)),
         ),
-        cp.identity(expected_dimension, dtype=cp.complex64),
+        xp.identity(expected_dimension, dtype=xp.complex64),
         atol=1.0e-5,
     ):
         raise NotUnitaryError
 
 
-def check_one_trace(matrix: cp.ndarray) -> None:
+def check_one_trace(matrix: xp.ndarray) -> None:
+    """
+    check trace of matrix is one
+
+    args:
+        matrix:  xp.ndarray
+            target matrix
+    """
     check_square(matrix)
-    if not cp.allclose(cp.trace(matrix), 1, atol=1.0e-5):
+    if not xp.allclose(xp.trace(matrix), 1, atol=1.0e-5):
         raise NonOneTraceError
 
 
-def check_density(matrix: cp.ndarray) -> None:
+def check_density(matrix: xp.ndarray) -> None:
+    """
+    check matrix is density
+
+    args:
+        matrix:  xp.ndarray
+            target matrix
+    """
     check_hermite(matrix)
     check_one_trace(matrix)
