@@ -14,6 +14,6 @@ rounded_decimal = int(os.getenv("PQENGINE_ROUNDED_DECIMAL", default="5"))
 xp: Any = (
     importlib.import_module("cupy")
     if "cupy-cuda" in ",".join(installed_packages)
-    and bool(os.getenv("PQENGINE_USE_CUPY", default="True"))
+    and bool(os.getenv("PQENGINE_USE_GPU", default="True"))
     else importlib.import_module("numpy")
 )

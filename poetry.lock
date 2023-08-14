@@ -73,7 +73,7 @@ files = [
 name = "cupy-cuda12x"
 version = "12.2.0"
 description = "CuPy: NumPy & SciPy for GPU"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "cupy_cuda12x-12.2.0-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:350cc1591d5af25aaf147974547a68f25eb9104b0fcd5fa3c89f32f4d42b88c7"},
@@ -103,7 +103,7 @@ test = ["hypothesis (>=6.37.2,<6.55.0)", "pytest (>=7.2)"]
 name = "fastrlock"
 version = "0.8.1"
 description = "Fast, re-entrant optimistic lock implemented in Cython"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "fastrlock-0.8.1-cp27-cp27m-macosx_10_15_x86_64.whl", hash = "sha256:e88ad64610f709daf6763fcb73b1640489d6cc3065761f0a9a42e83e0a0ce8da"},
@@ -377,7 +377,10 @@ files = [
     {file = "typing_extensions-4.7.1.tar.gz", hash = "sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2"},
 ]
 
+[extras]
+gpu = ["cupy-cuda12x"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "a69a13dc5f8fa01d35b9ab03af1f1a6e83a21d3b4b97d7f99427ec4383b9ebb4"
+content-hash = "92fe7a4a526a621b98c37c6f2c0373d276447ffacbbd300f16adf46e3d37c35f"

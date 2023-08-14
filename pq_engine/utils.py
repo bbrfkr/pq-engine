@@ -1,23 +1,10 @@
 from .exceptions import (
     NonOneTraceError,
     NotHermiteError,
-    NotOneDimensionalError,
     NotSquareError,
     NotUnitaryError,
 )
-from .settings import xp
-
-
-def check_1darray(array: xp.ndarray) -> None:
-    """
-    check given array is 1-dimensional
-
-    args:
-        array:  xp.ndarray
-            target array
-    """
-    if len(array.shape) != 1:
-        raise NotOneDimensionalError
+from .settings import atol, xp
 
 
 def check_square(matrix: xp.ndarray) -> None:
@@ -41,7 +28,7 @@ def check_hermite(matrix: xp.ndarray) -> None:
             target matrix
     """
     check_square(matrix)
-    if not xp.allclose(matrix, xp.conj(xp.transpose(matrix)), atol=1.0e-5):
+    if not xp.allclose(matrix, xp.conj(xp.transpose(matrix)), atol=atol):
         raise NotHermiteError
 
 
