@@ -1,27 +1,32 @@
-import cupy as cp
-
-from .exceptions import InconsistentStructureError, StructuresNotMatchError
+from .settings import xp
 from .state import State
-from .utils import check_1darray, check_unitary
+from .utils import check_unitary
 
 
 class TimeEvolution:
-    matrix: cp.ndarray
-    structure: cp.ndarray
+    """
+    time evolution
 
-    def __init__(self, matrix: cp.ndarray, structure: cp.ndarray):
-        check_1darray(structure)
+    params:
+        matrix:  xp.ndarray
+            representation matrix
+    """
+
+    matrix: xp.ndarray
+
+    def __init__(self, matrix: xp.ndarray):
         check_unitary(matrix)
-        expected_dimension = cp.prod(structure)
-        if cp.array([matrix.shape[0]], cp.int16) != expected_dimension:
-            raise InconsistentStructureError
-        self.structure = structure
         self.matrix = matrix
 
-    def time_evolve(self, state: State):
-        if not cp.array_equal(self.structure, state.structure):
-            raise StructuresNotMatchError
-        state.matrix = cp.dot(
+    def time_evolve(self, state: State) -> None:
+        """
+        time evolve target state
+
+        args:
+            state: State
+                target state
+        """
+        state.matrix = xp.dot(
             self.matrix,
-            cp.dot(state.matrix, cp.conj(cp.transpose(self.matrix))),
+            xp.dot(state.matrix, xp.conj(xp.transpose(self.matrix))),
         )

@@ -2,16 +2,10 @@ class PQEngineBaseError(Exception):
     """base error class"""
 
 
-class DimensionNotMatchError(PQEngineBaseError):
+class SizeNotMatchError(PQEngineBaseError):
     """error that dimension is not matching"""
 
-    message = "dimension of matrix is not 2."
-
-
-class NotOneDimensionalError(PQEngineBaseError):
-    """error that array is not 1 dimeisinoal."""
-
-    message = "array is not 1 dimeisinoal."
+    message = "size of matrix is not match."
 
 
 class NotSquareError(PQEngineBaseError):
@@ -38,13 +32,7 @@ class NonOneTraceError(PQEngineBaseError):
     message = "trace of matrix is not 1."
 
 
-class InconsistentStructureError(PQEngineBaseError):
-    """error for inconsistence between matrix dimension and structure"""
+class TargetNotFoundError(PQEngineBaseError):
+    """error that target is not found"""
 
-    message = "structure is inconsist with matrix dimension."
-
-
-class StructuresNotMatchError(PQEngineBaseError):
-    """error that structures not match"""
-
-    message = "structures not match."
+    message = "target is not found."

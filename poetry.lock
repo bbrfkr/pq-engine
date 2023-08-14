@@ -73,7 +73,7 @@ files = [
 name = "cupy-cuda12x"
 version = "12.2.0"
 description = "CuPy: NumPy & SciPy for GPU"
-optional = false
+optional = true
 python-versions = ">=3.8"
 files = [
     {file = "cupy_cuda12x-12.2.0-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:350cc1591d5af25aaf147974547a68f25eb9104b0fcd5fa3c89f32f4d42b88c7"},
@@ -103,7 +103,7 @@ test = ["hypothesis (>=6.37.2,<6.55.0)", "pytest (>=7.2)"]
 name = "fastrlock"
 version = "0.8.1"
 description = "Fast, re-entrant optimistic lock implemented in Cython"
-optional = false
+optional = true
 python-versions = "*"
 files = [
     {file = "fastrlock-0.8.1-cp27-cp27m-macosx_10_15_x86_64.whl", hash = "sha256:e88ad64610f709daf6763fcb73b1640489d6cc3065761f0a9a42e83e0a0ce8da"},
@@ -356,6 +356,17 @@ files = [
 ]
 
 [[package]]
+name = "types-setuptools"
+version = "68.0.0.3"
+description = "Typing stubs for setuptools"
+optional = false
+python-versions = "*"
+files = [
+    {file = "types-setuptools-68.0.0.3.tar.gz", hash = "sha256:d57ae6076100b5704b3cc869fdefc671e1baf4c2cd6643f84265dfc0b955bf05"},
+    {file = "types_setuptools-68.0.0.3-py3-none-any.whl", hash = "sha256:fec09e5c18264c5c09351c00be01a34456fb7a88e457abe97401325f84ad9d36"},
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.7.1"
 description = "Backported and Experimental Type Hints for Python 3.7+"
@@ -366,7 +377,10 @@ files = [
     {file = "typing_extensions-4.7.1.tar.gz", hash = "sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2"},
 ]
 
+[extras]
+gpu = ["cupy-cuda12x"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "b54dccc31717682d1ecd77a031750c0fe4bc5705b2c426654c94580eecdededb"
+content-hash = "92fe7a4a526a621b98c37c6f2c0373d276447ffacbbd300f16adf46e3d37c35f"
