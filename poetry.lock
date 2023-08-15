@@ -4,7 +4,7 @@
 name = "alabaster"
 version = "0.7.13"
 description = "A configurable sidebar-enabled Sphinx theme"
-optional = true
+optional = false
 python-versions = ">=3.6"
 files = [
     {file = "alabaster-0.7.13-py3-none-any.whl", hash = "sha256:1ee19aca801bbabb5ba3f5f258e4422dfa86f82f3e9cefb0859b283cdd7f62a3"},
@@ -15,7 +15,7 @@ files = [
 name = "babel"
 version = "2.12.1"
 description = "Internationalization utilities"
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "Babel-2.12.1-py3-none-any.whl", hash = "sha256:b4246fb7677d3b98f501a39d43396d3cafdc8eadb045f4a31be01863f655c610"},
@@ -70,7 +70,7 @@ uvloop = ["uvloop (>=0.15.2)"]
 name = "certifi"
 version = "2023.7.22"
 description = "Python package for providing Mozilla's CA Bundle."
-optional = true
+optional = false
 python-versions = ">=3.6"
 files = [
     {file = "certifi-2023.7.22-py3-none-any.whl", hash = "sha256:92d6037539857d8206b8f6ae472e8b77db8058fec5937a1ef3f54304089edbb9"},
@@ -81,7 +81,7 @@ files = [
 name = "charset-normalizer"
 version = "3.2.0"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
-optional = true
+optional = false
 python-versions = ">=3.7.0"
 files = [
     {file = "charset-normalizer-3.2.0.tar.gz", hash = "sha256:3bb3d25a8e6c0aedd251753a79ae98a093c7e7b471faa3aa9a93a81431987ace"},
@@ -220,7 +220,7 @@ test = ["hypothesis (>=6.37.2,<6.55.0)", "pytest (>=7.2)"]
 name = "docutils"
 version = "0.18.1"
 description = "Docutils -- Python Documentation Utilities"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 files = [
     {file = "docutils-0.18.1-py2.py3-none-any.whl", hash = "sha256:23010f129180089fbcd3bc08cfefccb3b890b0050e1ca00c867036e9d161b98c"},
@@ -315,7 +315,7 @@ pyflakes = ">=3.1.0,<3.2.0"
 name = "idna"
 version = "3.4"
 description = "Internationalized Domain Names in Applications (IDNA)"
-optional = true
+optional = false
 python-versions = ">=3.5"
 files = [
     {file = "idna-3.4-py3-none-any.whl", hash = "sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"},
@@ -326,7 +326,7 @@ files = [
 name = "imagesize"
 version = "1.4.1"
 description = "Getting image size from png/jpeg/jpeg2000/gif file"
-optional = true
+optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 files = [
     {file = "imagesize-1.4.1-py2.py3-none-any.whl", hash = "sha256:0d8d18d08f840c19d0ee7ca1fd82490fdc3729b7ac93f49870406ddde8ef8d8b"},
@@ -354,7 +354,7 @@ requirements-deprecated-finder = ["pip-api", "pipreqs"]
 name = "jinja2"
 version = "3.1.2"
 description = "A very fast and expressive template engine."
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "Jinja2-3.1.2-py3-none-any.whl", hash = "sha256:6088930bfe239f0e6710546ab9c19c9ef35e29792895fed6e6e31a023a182a61"},
@@ -371,7 +371,7 @@ i18n = ["Babel (>=2.7)"]
 name = "markupsafe"
 version = "2.1.3"
 description = "Safely add untrusted strings to HTML/XML markup."
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "MarkupSafe-2.1.3-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:cd0f502fe016460680cd20aaa5a76d241d6f35a1c3350c474bac1273803893fa"},
@@ -585,7 +585,7 @@ files = [
 name = "pygments"
 version = "2.16.1"
 description = "Pygments is a syntax highlighting package written in Python."
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "Pygments-2.16.1-py3-none-any.whl", hash = "sha256:13fc09fa63bc8d8671a6d247e1eb303c4b343eaee81d861f3404db2935653692"},
@@ -599,7 +599,7 @@ plugins = ["importlib-metadata"]
 name = "requests"
 version = "2.31.0"
 description = "Python HTTP for Humans."
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "requests-2.31.0-py3-none-any.whl", hash = "sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f"},
@@ -620,7 +620,7 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 name = "snowballstemmer"
 version = "2.2.0"
 description = "This package provides 29 stemmers for 28 languages generated from Snowball algorithms."
-optional = true
+optional = false
 python-versions = "*"
 files = [
     {file = "snowballstemmer-2.2.0-py2.py3-none-any.whl", hash = "sha256:c8e1716e83cc398ae16824e5572ae04e0d9fc2c6b985fb0f900f5f0c96ecba1a"},
@@ -631,7 +631,7 @@ files = [
 name = "sphinx"
 version = "7.1.2"
 description = "Python documentation generator"
-optional = true
+optional = false
 python-versions = ">=3.8"
 files = [
     {file = "sphinx-7.1.2-py3-none-any.whl", hash = "sha256:d170a81825b2fcacb6dfd5a0d7f578a053e45d3f2b153fecc948c37344eb4cbe"},
@@ -665,7 +665,7 @@ test = ["cython", "filelock", "html5lib", "pytest (>=4.6)"]
 name = "sphinx-rtd-theme"
 version = "1.3.0rc1"
 description = "Read the Docs theme for Sphinx"
-optional = true
+optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,>=2.7"
 files = [
     {file = "sphinx_rtd_theme-1.3.0rc1-py2.py3-none-any.whl", hash = "sha256:ace3640f8951a93fd514fccd02071abac340c28fb0c907f180a7608c416e99a2"},
@@ -684,7 +684,7 @@ dev = ["bump2version", "sphinxcontrib-httpdomain", "transifex-client", "wheel"]
 name = "sphinxcontrib-applehelp"
 version = "1.0.7"
 description = "sphinxcontrib-applehelp is a Sphinx extension which outputs Apple help books"
-optional = true
+optional = false
 python-versions = ">=3.9"
 files = [
     {file = "sphinxcontrib_applehelp-1.0.7-py3-none-any.whl", hash = "sha256:094c4d56209d1734e7d252f6e0b3ccc090bd52ee56807a5d9315b19c122ab15d"},
@@ -702,7 +702,7 @@ test = ["pytest"]
 name = "sphinxcontrib-devhelp"
 version = "1.0.5"
 description = "sphinxcontrib-devhelp is a sphinx extension which outputs Devhelp documents"
-optional = true
+optional = false
 python-versions = ">=3.9"
 files = [
     {file = "sphinxcontrib_devhelp-1.0.5-py3-none-any.whl", hash = "sha256:fe8009aed765188f08fcaadbb3ea0d90ce8ae2d76710b7e29ea7d047177dae2f"},
@@ -720,7 +720,7 @@ test = ["pytest"]
 name = "sphinxcontrib-htmlhelp"
 version = "2.0.4"
 description = "sphinxcontrib-htmlhelp is a sphinx extension which renders HTML help files"
-optional = true
+optional = false
 python-versions = ">=3.9"
 files = [
     {file = "sphinxcontrib_htmlhelp-2.0.4-py3-none-any.whl", hash = "sha256:8001661c077a73c29beaf4a79968d0726103c5605e27db92b9ebed8bab1359e9"},
@@ -738,7 +738,7 @@ test = ["html5lib", "pytest"]
 name = "sphinxcontrib-jquery"
 version = "4.1"
 description = "Extension to include jQuery on newer Sphinx releases"
-optional = true
+optional = false
 python-versions = ">=2.7"
 files = [
     {file = "sphinxcontrib-jquery-4.1.tar.gz", hash = "sha256:1620739f04e36a2c779f1a131a2dfd49b2fd07351bf1968ced074365933abc7a"},
@@ -752,7 +752,7 @@ Sphinx = ">=1.8"
 name = "sphinxcontrib-jsmath"
 version = "1.0.1"
 description = "A sphinx extension which renders display math in HTML via JavaScript"
-optional = true
+optional = false
 python-versions = ">=3.5"
 files = [
     {file = "sphinxcontrib-jsmath-1.0.1.tar.gz", hash = "sha256:a9925e4a4587247ed2191a22df5f6970656cb8ca2bd6284309578f2153e0c4b8"},
@@ -766,7 +766,7 @@ test = ["flake8", "mypy", "pytest"]
 name = "sphinxcontrib-qthelp"
 version = "1.0.6"
 description = "sphinxcontrib-qthelp is a sphinx extension which outputs QtHelp documents"
-optional = true
+optional = false
 python-versions = ">=3.9"
 files = [
     {file = "sphinxcontrib_qthelp-1.0.6-py3-none-any.whl", hash = "sha256:bf76886ee7470b934e363da7a954ea2825650013d367728588732c7350f49ea4"},
@@ -784,7 +784,7 @@ test = ["pytest"]
 name = "sphinxcontrib-serializinghtml"
 version = "1.1.8"
 description = "sphinxcontrib-serializinghtml is a sphinx extension which outputs \"serialized\" HTML files (json and pickle)"
-optional = true
+optional = false
 python-versions = ">=3.9"
 files = [
     {file = "sphinxcontrib_serializinghtml-1.1.8-py3-none-any.whl", hash = "sha256:27849e7227277333d3d32f17c138ee148a51fa01f888a41cd6d4e73bcabe2d06"},
@@ -824,7 +824,7 @@ files = [
 name = "urllib3"
 version = "2.0.4"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "urllib3-2.0.4-py3-none-any.whl", hash = "sha256:de7df1803967d2c2a98e4b11bb7d6bd9210474c46e8a0401514e3a42a75ebde4"},
@@ -838,10 +838,9 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [extras]
-docs = []
 gpu = ["cupy-cuda12x"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "18e6410990d01233e825c984c958d4079d49f66c41b92c61bf13f7e8d6956f59"
+content-hash = "736ec32e7e1cc7a5c0d37456c4737f16650bf0b3fff04d860a7e42a20411324d"
