@@ -1,0 +1,30 @@
+name: make_docs
+run-name: make docs
+on:
+  release:
+    types: [published]
+
+jobs:
+  make_docs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+      - run: |
+          poetry run sphinx-build -b singlehtml .sphinx docs
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs
+      - uses: actions/deploy-pages@main

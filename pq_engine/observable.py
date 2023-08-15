@@ -7,12 +7,9 @@ class Observable:
     """
     observable
 
-    params:
-        matrix:  xp.ndarray
-            representation matrix
+    Attributes:
+        matrix (xp.ndarray): representation matrix
     """
-
-    matrix: xp.ndarray
 
     def __init__(self, matrix: xp.ndarray):
         check_hermite(matrix)
@@ -22,12 +19,10 @@ class Observable:
         """
         observe target system with given state
 
-        args:
-            state: State
-                state of target system
-        return value:
-            float
-                observed value
+        Args:
+            state (State): state of target system
+        Returns:
+            float: observed value
         """
         eigen_values, eigen_vectors_groups = self._analyze_observable()
         return float(self._converge(state, eigen_values, eigen_vectors_groups))
@@ -36,8 +31,8 @@ class Observable:
         """
         derivate eigen values and eigen vectors of observable
 
-        return value:
-            tuple[ xp.array, list[ xp.array]]
+        Returns:
+            tuple[xp.array, list[xp.array]]:
                 devivated eigen values and eigen vectors groups
         """
         eigen_values, eigen_vectors = xp.linalg.eigh(self.matrix)
@@ -65,17 +60,15 @@ class Observable:
         """
         converge state
 
-        params:
-            state: State
-                target state for converged
-            observable_values: list[ xp.array]
+        Args:
+            state (State): target state for converged
+            observable_values (list[xp.array]):
                 array of observable values
-            observable_projections: list[ xp.array]
+            observable_projections (list[ xp.array]):
                 array of observable projections
 
-        return value:
-             xp.float32
-                observed value
+        Returns:
+            xp.float32: observed value
         """
         probabilities = xp.array(
             [
