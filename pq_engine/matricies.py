@@ -2,19 +2,20 @@ from math import sqrt
 
 from .settings import xp
 
+
+# create matrix from vector
+def create_matrix_from_vector(vector: xp.array):
+    vector = vector.reshape(vector.size, 1)
+    return xp.dot(vector, xp.conj(xp.transpose((vector))))
+
+
 # binary state vectors (column vectors)
 zero_state_vector = xp.array([1, 0], dtype=xp.complex64)
 one_state_vector = xp.array([0, 1], dtype=xp.complex64)
 plus_state_vector = xp.array([1 / sqrt(2), 1 / sqrt(2)], dtype=xp.complex64)
 minus_state_vector = xp.array([1 / sqrt(2), -1 / sqrt(2)], dtype=xp.complex64)
 
-
 # binary state matricies
-def create_matrix_from_vector(vector: xp.array):
-    vector = vector.reshape(vector.size, 1)
-    return xp.dot(vector, xp.conj(xp.transpose((vector))))
-
-
 zero_state_matrix = create_matrix_from_vector(zero_state_vector)
 one_state_matrix = create_matrix_from_vector(one_state_vector)
 plus_state_matrix = create_matrix_from_vector(plus_state_vector)
