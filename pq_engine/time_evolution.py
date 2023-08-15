@@ -7,12 +7,9 @@ class TimeEvolution:
     """
     time evolution
 
-    params:
-        matrix:  xp.ndarray
-            representation matrix
+    Attributes:
+        matrix (xp.ndarray): representation matrix
     """
-
-    matrix: xp.ndarray
 
     def __init__(self, matrix: xp.ndarray):
         check_unitary(matrix)
@@ -22,9 +19,8 @@ class TimeEvolution:
         """
         time evolve target state
 
-        args:
-            state: State
-                target state
+        Args:
+            state (State): target state
         """
         state.matrix = xp.dot(
             self.matrix,

@@ -9,12 +9,9 @@ class State:
     """
     state
 
-    params:
-        matrix:  xp.ndarray
-            representation matrix
+    Attributes:
+        matrix (xp.ndarray): representation matrix
     """
-
-    matrix: xp.ndarray
 
     def __init__(self, matrix: xp.ndarray):
         check_density(matrix)
@@ -24,11 +21,9 @@ class State:
         """
         reduce state by partial trace
 
-        args:
-            target: int
-                reduction target index
-            sttucture: list[int]
-                dimensions with partial systems
+        Args:
+            target (int): reduction target index
+            sttucture (list[int]): dimensions with partial systems
         """
         if self.matrix.shape[0] != int(xp.prod(xp.array(structure))):
             raise SizeNotMatchError

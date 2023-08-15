@@ -3,8 +3,16 @@ from math import sqrt
 from .settings import xp
 
 
-# create matrix from vector
-def create_matrix_from_vector(vector: xp.array):
+def create_matrix_from_vector(vector: xp.ndarray) -> xp.ndarray:
+    """
+    create matrix from vector
+
+    Args:
+        vector (xp.ndarray): source vector
+
+    Returns:
+        xp.ndarray: matrix converted by source vector
+    """
     vector = vector.reshape(vector.size, 1)
     return xp.dot(vector, xp.conj(xp.transpose((vector))))
 
