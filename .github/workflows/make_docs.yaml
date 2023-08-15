@@ -1,9 +1,9 @@
 name: make_docs
 run-name: make docs
 on:
-  push:
-    branches:
-      - mkdocs
+  release:
+    types: [published]
+
 jobs:
   make_docs:
     runs-on: ubuntu-latest

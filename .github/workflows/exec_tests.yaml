@@ -1,9 +1,6 @@
 name: exec_tests
 run-name: exec tests
-on:
-  push:
-    branches:
-      - mkdocs
+on: [push]
 jobs:
   make_docs:
     runs-on: ubuntu-latest
