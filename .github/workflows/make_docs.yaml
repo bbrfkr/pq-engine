@@ -20,7 +20,7 @@ jobs:
           pip install poetry
           poetry install -E docs
       - run: |
-          poetry shell sphinx-build -b singlehtml .sphinx docs
+          poetry run sphinx-build -b singlehtml .sphinx docs
       - uses: actions/upload-pages-artifact@v1
         with:
           path: docs
