@@ -28,7 +28,7 @@
 
 - random value generator by hadamard gate
     ```
-    python examples/quantum_teleportation.py
+    python examples/random_generator.py
     ```
 
 ## Settings
