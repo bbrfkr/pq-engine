@@ -21,7 +21,12 @@
     ```
 
 ## Get Started
-- quantum teleportation example
+- quantum teleportation
+    ```
+    python examples/quantum_teleportation.py
+    ```
+
+- random value generator by hadamard gate
     ```
     python examples/quantum_teleportation.py
     ```
