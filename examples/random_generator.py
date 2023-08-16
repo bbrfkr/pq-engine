@@ -4,7 +4,7 @@ from pq_engine.state import State
 from pq_engine.observable import Observable
 from pq_engine.time_evolution import TimeEvolution
 
-bits_count = 13
+bits_count = 8
 
 initial_state_matrix = zero_state_matrix
 time_evolution_matrix = hadamard_matrix
@@ -29,4 +29,4 @@ observable_matrix = xp.diag(xp.array(
 observable = Observable(observable_matrix)
 random_value = int(observable.observe(state))
 
-print(f"random value in [0,{2**bits_count}]: {random_value}")
+print(f"random value in [0,{2**bits_count-1}]: {random_value}")
