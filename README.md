@@ -34,5 +34,5 @@
     - atol value used by numpy or cupy.
 - PQENGINE_RTOL (default: "1e-5")
     - rtol value used by numpy or cupy.
-- PQENGINE_ROUNDED_DECIMAL (default: "5") 
+- PQENGINE_ROUNDED_DECIMAL (default: "8") 
     - approximation order of decimal used by numpy or cupy
