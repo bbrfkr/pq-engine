@@ -15,7 +15,7 @@ atol = float(os.getenv("PQENGINE_ATOL", default="1.0e-5"))
 rtol = float(os.getenv("PQENGINE_RTOL", default="1.0e-5"))
 
 #: approximation order of decimal used by numpy or cupy
-rounded_decimal = int(os.getenv("PQENGINE_ROUNDED_DECIMAL", default="5"))
+rounded_decimal = int(os.getenv("PQENGINE_ROUNDED_DECIMAL", default="8"))
 
 #: calculation engine (numpy or cupy)
 xp: Any = (
