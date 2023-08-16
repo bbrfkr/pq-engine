@@ -4,7 +4,7 @@ from pq_engine.state import State
 from pq_engine.observable import Observable
 from pq_engine.time_evolution import TimeEvolution
 
-bits_count = 8
+bits_count = 10
 
 initial_state_matrix = zero_state_matrix
 time_evolution_matrix = hadamard_matrix
