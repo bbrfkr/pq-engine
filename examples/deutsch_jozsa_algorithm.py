@@ -21,7 +21,7 @@ def multiple_kron(n, array):
 
 from random import randint
 
-bits_count = 12
+bits_count = 10
 
 
 def zero_function(x):
