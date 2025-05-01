@@ -69,6 +69,15 @@ pauli_z_matrix = xp.array(
     dtype=xp.complex64,
 )
 
+#: identity
+identity_matrix = xp.array(
+    [
+        [1, 0],
+        [0, 1],
+    ],
+    dtype=xp.complex64,
+)
+
 #: not matrix
 not_matrix = pauli_x_matrix
 

@@ -1,3 +1,8 @@
+# Quantum teleportation example
+# This example demonstrates the quantum teleportation protocol using the pq_engine library.
+# It involves creating a quantum state, entangling it with an EPR pair, performing measurements,
+# and applying time evolution to teleport the state.
+
 from math import sqrt
 from random import uniform
 
