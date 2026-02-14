@@ -4,70 +4,73 @@ from .exceptions import (
     NotSquareError,
     NotUnitaryError,
 )
-from .settings import atol, xp
+from typing import Any
+from .settings import atol, array_engine
 
 
-def check_square(matrix: xp.ndarray) -> None:
+def check_square(matrix: Any) -> None:
     """
     check matrix is square
 
     Args:
-        matrix (xp.ndarray): target matrix
+        matrix (array_engine.ndarray): target matrix
     """
     if matrix.shape[0] != matrix.shape[1]:
         raise NotSquareError
 
 
-def check_hermite(matrix: xp.ndarray) -> None:
+def check_hermite(matrix: Any) -> None:
     """
     check matrix is hermite
 
     Args:
-        matrix (xp.ndarray): target matrix
+        matrix (array_engine.ndarray): target matrix
     """
     check_square(matrix)
-    if not xp.allclose(matrix, xp.conj(xp.transpose(matrix)), atol=atol):
+    if not array_engine.allclose(
+        matrix, array_engine.conj(array_engine.transpose(matrix)), atol=atol
+    ):
         raise NotHermiteError
 
 
-def check_unitary(matrix: xp.ndarray) -> None:
+def check_unitary(matrix: Any) -> None:
     """
     check matrix is unitary
 
     Args:
-        matrix (xp.ndarray): target matrix
+        matrix (array_engine.ndarray): target matrix
     """
     check_square(matrix)
     expected_dimension = matrix.shape[0]
-    if not xp.allclose(
-        xp.dot(
+    if not array_engine.allclose(
+        array_engine.dot(
             matrix,
-            xp.conj(xp.transpose(matrix)),
+            array_engine.conj(array_engine.transpose(matrix)),
         ),
-        xp.identity(expected_dimension, dtype=xp.complex64),
+        array_engine.identity(expected_dimension, dtype=array_engine.complex64),
         atol=1.0e-5,
     ):
         raise NotUnitaryError
 
 
-def check_one_trace(matrix: xp.ndarray) -> None:
+def check_one_trace(matrix: Any) -> None:
     """
     check trace of matrix is one
 
     Args:
-        matrix (xp.ndarray): target matrix
+        matrix (array_engine.ndarray): target matrix
     """
     check_square(matrix)
-    if not xp.allclose(xp.trace(matrix), 1, atol=1.0e-5):
+    if not array_engine.allclose(array_engine.trace(matrix), 1, atol=1.0e-5):
         raise NonOneTraceError
 
 
-def check_density(matrix: xp.ndarray) -> None:
+def check_density(matrix: Any) -> None:
     """
     check matrix is density
 
     Args:
-        matrix (xp.ndarray): target matrix
+        matrix (array_engine.ndarray): target matrix
     """
     check_hermite(matrix)
     check_one_trace(matrix)
