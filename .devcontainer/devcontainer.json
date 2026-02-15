@@ -1,0 +1,28 @@
+{
+  "name": "pq-engine",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "runArgs": [
+    "--gpus", "all",
+    "--runtime=nvidia"
+  ],
+  "hostRequirements": {
+    "gpu": true
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/bin/python3.13"
+      }
+    }
+  },
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}",
+    "LD_LIBRARY_PATH": "${containerEnv:LD_LIBRARY_PATH}",
+    "CUDA_PATH": "${containerEnv:CUDA_PATH}"
+  }
+}

@@ -90,9 +90,7 @@ class Observable:
             dtype=array_engine.float32,
         )
         indices = array_engine.arange(probabilities.size)
-        observed_index = int(
-            array_engine.random.choice(indices, size=None, p=probabilities)
-        )
+        observed_index = int(array_engine.random.choice(indices, size=1, p=probabilities)[0])
         observed_probability = probabilities[observed_index]
         observed_vectors = eigen_vectors_groups[observed_index]
         observed_projection = array_engine.zeros(state.matrix.shape)
