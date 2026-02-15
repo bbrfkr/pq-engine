@@ -15,7 +15,13 @@ from .matricies import (
     zero_state_vector,
 )
 from .observable import Observable
-from .settings import array_engine, atol, is_array_module, rtol, rounded_decimal
+from .settings import (
+    array_engine,
+    atol,
+    is_array_module,
+    rtol,
+    rounded_decimal,
+)
 from .state import State
 from .time_evolution import TimeEvolution
 

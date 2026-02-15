@@ -2,8 +2,6 @@ import importlib
 import os
 from typing import Any, Protocol, runtime_checkable, TypeGuard, cast
 
-import pkg_resources
-
 
 @runtime_checkable
 class RandomModule(Protocol):
@@ -28,10 +26,14 @@ class ArrayModule(Protocol):
     def kron(self, a: Any, b: Any) -> Any: ...
     def conj(self, x: Any) -> Any: ...
     def transpose(self, x: Any) -> Any: ...
-    def trace(x: Any, offset: Any = None, axis1: int = 0, axis2: int = 1) -> Any: ...
+    def trace(
+        x: Any, offset: Any = None, axis1: int = 0, axis2: int = 1
+    ) -> Any: ...
     def reshape(self, x: Any, *args, **kwargs) -> Any: ...
     def prod(self, x: Any, axis: Any = None) -> Any: ...
-    def allclose(a: Any, b: Any, rtol: float = 1e-5, atol: float = 1e-8) -> bool: ...
+    def allclose(
+        a: Any, b: Any, rtol: float = 1e-5, atol: float = 1e-8
+    ) -> bool: ...
     def sum(self, a: Any, axis: Any = None) -> Any: ...
     def add(self, x1: Any, x2: Any) -> Any: ...
     def divide(self, x1: Any, x2: Any) -> Any: ...
@@ -51,8 +53,6 @@ def is_array_module(module: Any) -> TypeGuard[ArrayModule]:
     return isinstance(module, ArrayModule)
 
 
-installed_packages = [package_info.key for package_info in pkg_resources.working_set]
-
 #: atol value used by numpy or cupy.
 atol = float(os.getenv("PQENGINE_ATOL", default="1.0e-5"))
 
@@ -67,8 +67,7 @@ array_engine: ArrayModule = cast(
     ArrayModule,
     (
         importlib.import_module("cupy")
-        if "cupy-cuda" in ",".join(installed_packages)
-        and bool(os.getenv("PQENGINE_USE_GPU", default="True"))
+        if os.getenv("PQENGINE_USE_GPU", default="")
         else importlib.import_module("numpy")
     ),
 )

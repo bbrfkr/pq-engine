@@ -1,6 +1,5 @@
 from math import sqrt
 from typing import Any
-
 from .exceptions import SizeNotMatchError, TargetNotFoundError
 from .settings import array_engine
 from .utils import check_density
@@ -24,7 +23,7 @@ class State:
 
         Args:
             target (int): reduction target index
-            sttucture (list[int]): dimensions with partial systems
+            structure (list[int]): dimensions with partial systems
         """
         if self.matrix.shape[0] != int(
             array_engine.prod(array_engine.array(structure))

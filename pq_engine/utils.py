@@ -47,8 +47,10 @@ def check_unitary(matrix: Any) -> None:
             matrix,
             array_engine.conj(array_engine.transpose(matrix)),
         ),
-        array_engine.identity(expected_dimension, dtype=array_engine.complex64),
-        atol=1.0e-5,
+        array_engine.identity(
+            expected_dimension, dtype=array_engine.complex64
+        ),
+        atol=atol,
     ):
         raise NotUnitaryError
 
@@ -61,7 +63,7 @@ def check_one_trace(matrix: Any) -> None:
         matrix (array_engine.ndarray): target matrix
     """
     check_square(matrix)
-    if not array_engine.allclose(array_engine.trace(matrix), 1, atol=1.0e-5):
+    if not array_engine.allclose(array_engine.trace(matrix), 1, atol=atol):
         raise NonOneTraceError
 
 

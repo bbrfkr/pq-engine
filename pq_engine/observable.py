@@ -48,7 +48,8 @@ class Observable:
         indices = list(indices)
         indices.append(eigen_vectors.shape[0])
         eigen_vectors_groups = [
-            eigen_vectors[indices[i] : indices[i + 1]] for i in range(len(indices) - 1)
+            eigen_vectors[indices[i] : indices[i + 1]]
+            for i in range(len(indices) - 1)
         ]
         return (eigen_values, eigen_vectors_groups)
 
@@ -74,7 +75,9 @@ class Observable:
                             [
                                 array_engine.inner(
                                     eigen_vectors[i],
-                                    array_engine.dot(state.matrix, eigen_vectors[i]),
+                                    array_engine.dot(
+                                        state.matrix, eigen_vectors[i]
+                                    ),
                                 )
                                 for i in range(eigen_vectors.shape[0])
                             ]
@@ -97,13 +100,18 @@ class Observable:
             observed_projection = array_engine.add(
                 observed_projection,
                 array_engine.dot(
-                    array_engine.transpose(array_engine.array([observed_vectors[i]])),
-                    array_engine.conj(array_engine.array([observed_vectors[i]])),
+                    array_engine.transpose(
+                        array_engine.array([observed_vectors[i]])
+                    ),
+                    array_engine.conj(
+                        array_engine.array([observed_vectors[i]])
+                    ),
                 ),
             )
         state.matrix = array_engine.divide(
             array_engine.dot(
-                observed_projection, array_engine.dot(state.matrix, observed_projection)
+                observed_projection,
+                array_engine.dot(state.matrix, observed_projection),
             ),
             observed_probability,
         )

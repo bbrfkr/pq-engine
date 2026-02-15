@@ -15,7 +15,9 @@ def create_matrix_from_vector(vector: Any) -> Any:
         array_engine.ndarray: matrix converted by source vector
     """
     vector = vector.reshape(vector.size, 1)
-    return array_engine.dot(vector, array_engine.conj(array_engine.transpose((vector))))
+    return array_engine.dot(
+        vector, array_engine.conj(array_engine.transpose((vector)))
+    )
 
 
 # binary state vectors (column vectors)
@@ -94,7 +96,8 @@ epr_pair_vectors = [
         controlled_not,
         (
             array_engine.kron(
-                array_engine.dot(hadamard_matrix, zero_state_vector), zero_state_vector
+                array_engine.dot(hadamard_matrix, zero_state_vector),
+                zero_state_vector,
             )
         ),
     ),
@@ -102,7 +105,8 @@ epr_pair_vectors = [
         controlled_not,
         (
             array_engine.kron(
-                array_engine.dot(hadamard_matrix, zero_state_vector), one_state_vector
+                array_engine.dot(hadamard_matrix, zero_state_vector),
+                one_state_vector,
             )
         ),
     ),
@@ -110,7 +114,8 @@ epr_pair_vectors = [
         controlled_not,
         (
             array_engine.kron(
-                array_engine.dot(hadamard_matrix, one_state_vector), one_state_vector
+                array_engine.dot(hadamard_matrix, one_state_vector),
+                one_state_vector,
             )
         ),
     ),
@@ -118,12 +123,14 @@ epr_pair_vectors = [
         controlled_not,
         (
             array_engine.kron(
-                array_engine.dot(hadamard_matrix, one_state_vector), zero_state_vector
+                array_engine.dot(hadamard_matrix, one_state_vector),
+                zero_state_vector,
             )
         ),
     ),
 ]
 #: epr pairs state matricies
 epr_pair_matricies = [
-    create_matrix_from_vector(epr_pair_vector) for epr_pair_vector in epr_pair_vectors
+    create_matrix_from_vector(epr_pair_vector)
+    for epr_pair_vector in epr_pair_vectors
 ]

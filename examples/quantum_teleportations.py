@@ -71,13 +71,18 @@ if int(observed_value) == 0:
         array_engine.identity(4), array_engine.identity(2)
     )
 elif int(observed_value) == 1:
-    time_evolution_matrix = array_engine.kron(array_engine.identity(4), pauli_x_matrix)
+    time_evolution_matrix = array_engine.kron(
+        array_engine.identity(4), pauli_x_matrix
+    )
 elif int(observed_value) == 2:
     time_evolution_matrix = array_engine.kron(
-        array_engine.identity(4), array_engine.dot(pauli_x_matrix, pauli_z_matrix)
+        array_engine.identity(4),
+        array_engine.dot(pauli_x_matrix, pauli_z_matrix),
     )
 elif int(observed_value) == 3:
-    time_evolution_matrix = array_engine.kron(array_engine.identity(4), pauli_z_matrix)
+    time_evolution_matrix = array_engine.kron(
+        array_engine.identity(4), pauli_z_matrix
+    )
 else:
     raise ValueError(f"Unexpected observed value: {observed_value}")
 time_evolution = TimeEvolution(time_evolution_matrix)
