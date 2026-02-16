@@ -5,7 +5,7 @@ class PQEngineBaseError(Exception):
 class SizeNotMatchError(PQEngineBaseError):
     """error that dimension is not matching"""
 
-    message = "size of matrix is not match."
+    message = "size(s) of matrix is not match."
 
 
 class NotSquareError(PQEngineBaseError):
@@ -36,3 +36,15 @@ class TargetNotFoundError(PQEngineBaseError):
     """error that target is not found"""
 
     message = "target is not found."
+
+
+class InvalidValueError(PQEngineBaseError):
+    """error that target is invalid value"""
+
+    message = "target is invalid value"
+
+
+class NotMeasurementError(PQEngineBaseError):
+    """error that target is not measurement"""
+
+    message = "target is not measurement"
