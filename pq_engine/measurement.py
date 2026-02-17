@@ -27,7 +27,7 @@ class Measurement:
     """
 
     def __init__(self, units: Any):
-        check_measurement(units)
+        self._check_measurement(units)
         self.units = units
 
     def measure(self, state: State) -> float:
@@ -66,3 +66,34 @@ class Measurement:
             Any: observed value
         """
         pass
+
+    def _check_measurement(units: List[MeasurementUnit]) -> None:
+        # check all units are the same dimension
+        dimensions = set([
+            unit.shape[0]
+            for unit in units
+        ])
+        if not len(dims) == 1:
+            raise SizeNotMatchError
+
+        expected_dimension = dimensions[0]
+        # check the sum over generate matricies of units is identity
+        matricies = [
+            array_engine.dot(
+                array_engine.conj(
+                    unit.matrix
+                ),
+                unit.matrix
+            )
+            for unit in units
+        ]
+        if not array_engine.allclose(
+            array_engine.sum(
+                matricies
+            ),
+            array_engine.identity(
+                expected_dimension, dtype=array_engine.complex64
+            ),
+            atol=atol,
+        ):
+            raise NotMeasurementError
