@@ -27,6 +27,6 @@ class TimeEvolution:
             self.matrix,
             array_engine.dot(
                 state.matrix,
-                array_engine.conj(array_engine.transpose(self.matrix)),
+                array_engine.conj(self.matrix).T,
             ),
         )

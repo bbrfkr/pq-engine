@@ -30,7 +30,7 @@ def check_hermite(matrix: Any) -> None:
     """
     check_square(matrix)
     if not array_engine.allclose(
-        matrix, array_engine.conj(array_engine.transpose(matrix)), atol=atol
+        matrix, array_engine.conj(matrix).T, atol=atol
     ):
         raise NotHermiteError
 
@@ -43,14 +43,14 @@ def check_unitary(matrix: Any) -> None:
         matrix (array_engine.ndarray): target matrix
     """
     check_square(matrix)
-    expected_dimension = matrix.shape[0]
+    dimension = matrix.shape[0]
     if not array_engine.allclose(
         array_engine.dot(
             matrix,
-            array_engine.conj(array_engine.transpose(matrix)),
+            array_engine.conj(matrix).T,
         ),
         array_engine.identity(
-            expected_dimension, dtype=array_engine.complex64
+            dimension, dtype=array_engine.complex64
         ),
         atol=atol,
     ):
