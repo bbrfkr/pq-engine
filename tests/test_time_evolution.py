@@ -245,3 +245,68 @@ class TestTimeEvolution:
         assert np.allclose(np.trace(state.matrix), 1.0, atol=1e-5), (
             "トレースが1であるべき"
         )
+
+    def test_compose_creates_tensor_product(self):
+        """合成系の行列がテンソル積になっていることを確認"""
+        hadamard = np.array([[1, 1], [1, -1]], dtype=np.complex64) / np.sqrt(2)
+        pauli_x = np.array([[0, 1], [1, 0]], dtype=np.complex64)
+
+        te_h = TimeEvolution(hadamard)
+        te_p = TimeEvolution(pauli_x)
+
+        composed = te_h.compose(te_p)
+
+        expected = np.kron(hadamard, pauli_x)
+        np.testing.assert_array_almost_equal(composed.matrix, expected, decimal=6)
+
+    def test_compose_produces_unitary_matrix(self):
+        """合成系の行列がユニタリであることを確認"""
+        matrix1 = np.array([[1, 0], [0, 1j]], dtype=np.complex64)
+        matrix2 = np.array([[0, 1], [1, 0]], dtype=np.complex64)
+
+        te1 = TimeEvolution(matrix1)
+        te2 = TimeEvolution(matrix2)
+
+        composed = te1.compose(te2)
+
+        U = composed.matrix
+        U_dag = np.conj(U).T
+        I = np.identity(4, dtype=np.complex64)
+
+        np.testing.assert_array_almost_equal(np.dot(U, U_dag), I, decimal=6)
+        np.testing.assert_array_almost_equal(np.dot(U_dag, U), I, decimal=6)
+
+    def test_compose_with_different_dimensions(self):
+        """異なる次元の時間発展を合成して正しい次元になることを確認"""
+        hadamard = np.array([[1, 1], [1, -1]], dtype=np.complex64) / np.sqrt(2)
+        unitary_3x3 = np.diag([1, 1j, -1]).astype(np.complex64)
+
+        te_2x2 = TimeEvolution(hadamard)
+        te_3x3 = TimeEvolution(unitary_3x3)
+
+        composed = te_2x2.compose(te_3x3)
+
+        assert composed.matrix.shape == (6, 6)
+
+    def test_compose_on_composite_state(self):
+        """合成系の時間発展が複合系に正しく作用することを確認"""
+        hadamard = np.array([[1, 1], [1, -1]], dtype=np.complex64) / np.sqrt(2)
+        pauli_x = np.array([[0, 1], [1, 0]], dtype=np.complex64)
+
+        psi1 = np.array([1, 0], dtype=np.complex64)
+        psi2 = np.array([0, 1], dtype=np.complex64)
+
+        rho1 = np.outer(psi1, np.conj(psi1))
+        rho2 = np.outer(psi2, np.conj(psi2))
+
+        state = State(np.kron(rho1, rho2))
+
+        te_h = TimeEvolution(hadamard)
+        te_p = TimeEvolution(pauli_x)
+        composed = te_h.compose(te_p)
+
+        original_trace = np.trace(state.matrix)
+        composed.time_evolve(state)
+
+        assert np.trace(state.matrix) == pytest.approx(original_trace, abs=1e-5)
+        assert np.allclose(state.matrix, np.conj(state.matrix).T)

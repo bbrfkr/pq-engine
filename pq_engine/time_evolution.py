@@ -30,3 +30,16 @@ class TimeEvolution:
                 array_engine.conj(self.matrix).T,
             ),
         )
+
+    def compose(self, other: "TimeEvolution") -> "TimeEvolution":
+        """
+        composite time evolution (tensor product U1 ⊗ U2)
+
+        Args:
+            other (TimeEvolution): composition target
+
+        Returns:
+            TimeEvolution: composed time evolution
+        """
+        composed_matrix = array_engine.kron(self.matrix, other.matrix)
+        return TimeEvolution(composed_matrix)
