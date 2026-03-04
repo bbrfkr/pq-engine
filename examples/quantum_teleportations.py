@@ -1,7 +1,7 @@
 from math import sqrt
 from random import uniform
 
-from pq_engine.matricies import (
+from pq_engine.matrices import (
     create_matrix_from_vector,
     epr_pair_matricies,
     one_state_vector,

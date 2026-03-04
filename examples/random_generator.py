@@ -1,4 +1,4 @@
-from pq_engine.matricies import hadamard_matrix, zero_state_matrix
+from pq_engine.matrices import hadamard_matrix, zero_state_matrix
 from pq_engine.settings import array_engine
 from pq_engine.state import State
 from pq_engine.observable import Observable

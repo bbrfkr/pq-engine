@@ -1,4 +1,4 @@
-from .matricies import (
+from .matrices import (
     controlled_not,
     hadamard_matrix,
     minus_state_matrix,
